@@ -1,11 +1,15 @@
 import express from 'express';
 import apiRoute from './routes/api';
+import sequelize from './db/';
 import 'dotenv/config';
+import { authenticateDBConnection } from './middlewares';
 
 const app = express();
 const { PORT } = process.env;
 
 app.use(express.json());
+
+app.use(authenticateDBConnection);
 
 app.use('/api', apiRoute);
 
