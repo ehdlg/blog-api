@@ -16,6 +16,8 @@
     "@types/node": "^20.11.30",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mariadb": "^3.3.0",
+    "sequelize": "^6.37.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
   }
