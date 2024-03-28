@@ -1,7 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../../db';
 import { UUID } from 'crypto';
-import User from './User';
 
 interface IPost extends Model<InferAttributes<IPost>, InferCreationAttributes<IPost>> {
   id: UUID;
@@ -24,9 +23,5 @@ const Post = sequelize.define<IPost>('Post', {
   updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   user_id: { type: DataTypes.UUID, allowNull: false },
 });
-
-Post.hasOne(User, { foreignKey: 'user_id' });
-
-Post.sync();
 
 export default Post;

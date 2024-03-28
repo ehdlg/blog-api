@@ -1,7 +1,6 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
 import sequelize from '../../db';
 import { UUID } from 'crypto';
-import Post from './Post';
 
 interface IComment extends Model<InferAttributes<IComment>, InferCreationAttributes<IComment>> {
   id: UUID;
@@ -12,7 +11,7 @@ interface IComment extends Model<InferAttributes<IComment>, InferCreationAttribu
   post_id: UUID;
 }
 
-const Comment = sequelize.define<IComment>('Post', {
+const Comment = sequelize.define<IComment>('Comment', {
   id: {
     type: DataTypes.UUID,
     primaryKey: true,
@@ -39,8 +38,6 @@ const Comment = sequelize.define<IComment>('Post', {
   },
 });
 
-Comment.belongsTo(Post, { foreignKey: 'post_id' });
-
-Comment.sync();
+// Comment.belongsTo(Post, { foreignKey: 'post_id' });
 
 export default Comment;
