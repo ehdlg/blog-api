@@ -1,0 +1,32 @@
+import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
+import sequelize from '../../db';
+import { UUID } from 'crypto';
+import User from './User';
+
+interface IPost extends Model<InferAttributes<IPost>, InferCreationAttributes<IPost>> {
+  id: UUID;
+  title: string;
+  content: string;
+  likes: number;
+  views: number;
+  published_at: Date;
+  updated_at: Date;
+  user_id: UUID;
+}
+
+const Post = sequelize.define<IPost>('Post', {
+  id: { type: DataTypes.UUID, primaryKey: true },
+  title: { type: DataTypes.STRING, allowNull: false },
+  content: { type: DataTypes.STRING, allowNull: false },
+  likes: { type: DataTypes.INTEGER, defaultValue: 0 },
+  views: { type: DataTypes.INTEGER, defaultValue: 0 },
+  published_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  user_id: { type: DataTypes.UUID, allowNull: false },
+});
+
+Post.hasOne(User, { foreignKey: 'user_id' });
+
+Post.sync();
+
+export default Post;
