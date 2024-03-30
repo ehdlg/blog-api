@@ -1,5 +1,5 @@
 import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequelize';
-import sequelize from '../../db';
+import sequelize from './config';
 import { UUID } from 'crypto';
 
 interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>> {
