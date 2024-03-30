@@ -20,5 +20,9 @@
     "sequelize": "^6.37.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.3"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "bcrypt": "^5.1.1"
   }
 }
