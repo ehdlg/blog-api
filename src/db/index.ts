@@ -1,11 +1,23 @@
-import { Sequelize } from 'sequelize';
+import User from './sequelize/User';
+import Comment from './sequelize/Comment';
+import Post from './sequelize/Post';
+import sequelize from './sequelize/config';
 import 'dotenv/config';
 
-const { DB_HOST, DB_USER, DB_PASS, DB_NAME } = process.env;
+export const initDb = () => {
+  Post.belongsTo(User, { foreignKey: 'user_id' });
+  User.hasMany(Post, { foreignKey: 'user_id' });
+  Comment.belongsTo(Post, { foreignKey: 'post_id' });
+  Post.hasMany(Comment, { foreignKey: 'post_id' });
 
-const sequelize = new Sequelize(DB_NAME as string, DB_USER as string, DB_PASS, {
-  host: DB_HOST,
-  dialect: 'mariadb',
-});
+  sequelize
+    .sync()
+    .then(() => {
+      console.log('Tables synced');
+    })
+    .catch((e) => {
+      console.error('Error while trying to sync the tables ', e);
+    });
+};
 
-export default sequelize;
+export { User, Post, Comment };

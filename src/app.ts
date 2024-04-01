@@ -1,22 +1,27 @@
 import express from 'express';
 import apiRoute from './routes/api';
-import sequelize from './db/';
 import 'dotenv/config';
-import { authenticateDBConnection } from './middlewares';
+import { errorHandler, notFoundHandler } from './middlewares';
+import { initDb } from './db';
 
 const app = express();
 const { PORT } = process.env;
 
-app.use(express.json());
+function main() {
+  try {
+    initDb();
+    console.log(`App listening on: http://localhost:${PORT}`);
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-app.use(authenticateDBConnection);
+app.use(express.json());
 
 app.use('/api', apiRoute);
 
-app.use((_, res) => {
-  res.status(404).json({ message: 'Not found' });
-});
+app.use(notFoundHandler);
 
-app.listen(PORT, () => {
-  console.log(`App listening on: http://localhost:${PORT}`);
-});
+app.use(errorHandler);
+
+app.listen(PORT, main);
