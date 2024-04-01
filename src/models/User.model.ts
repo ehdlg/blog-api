@@ -2,11 +2,15 @@ import { User } from '../db';
 
 export default class UserModel {
   static async get({ username }: { username?: string }) {
-    if (null == username) return await User.findAll();
+    try {
+      if (null == username) return await User.findAll();
 
-    const newUser = await User.findOne({ where: { username: username } });
+      const newUser = await User.findOne({ where: { username: username } });
 
-    return newUser;
+      return newUser;
+    } catch (e) {
+      throw e;
+    }
   }
 
   static async create({ username, password }: { username: string; password: string }) {
