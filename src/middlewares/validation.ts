@@ -1,7 +1,14 @@
 import { body, validationResult } from 'express-validator';
 import { RequestHandler } from 'express';
+import UserModel from '../models/User.model';
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/;
+
+const usernameAlreadyTaken = async (value: string) => {
+  const userInDB = await UserModel.get({ username: value });
+
+  if (null != userInDB) throw new Error('Username already taken.');
+};
 
 export const createUserRules = (() => {
   return [
@@ -9,7 +16,9 @@ export const createUserRules = (() => {
       .exists()
       .withMessage('Username required')
       .isLength({ min: 3, max: 15 })
-      .withMessage('Username must be between 3 and 15 characters long.'),
+      .withMessage('Username must be between 3 and 15 characters long.')
+      .custom(usernameAlreadyTaken),
+
     body('password')
       .exists()
       .withMessage('Password required')
@@ -37,7 +46,8 @@ export const updateUserRules = (() => {
       .matches(PASSWORD_REGEX)
       .withMessage(
         'Password must contain at least one uppercase letter, one lowercase letter, one number, and one of the following special characters: !@#$%^&*'
-      ),
+      )
+      .custom(usernameAlreadyTaken),
   ];
 })();
 

@@ -40,6 +40,7 @@ export default class UserController {
   static update: RequestHandler = async (req, res, next) => {
     const { username, password, updatedUser } = req.body;
 
+    //TODO implement
     res.json({ username, password, updatedUser });
   };
 }
