@@ -2,14 +2,14 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequ
 import sequelize from './config';
 import { UUID } from 'crypto';
 
-interface IPost extends Model<InferAttributes<IPost>, InferCreationAttributes<IPost>> {
+export interface IPost extends Model<InferAttributes<IPost>, InferCreationAttributes<IPost>> {
   id: UUID;
   title: string;
   content: string;
-  likes: number;
-  views: number;
-  published_at: Date;
-  updated_at: Date;
+  likes?: number;
+  views?: number;
+  published_at?: Date;
+  updated_at?: Date;
   user_id: UUID;
 }
 
