@@ -2,7 +2,8 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequ
 import sequelize from './config';
 import { UUID } from 'crypto';
 
-interface IComment extends Model<InferAttributes<IComment>, InferCreationAttributes<IComment>> {
+export interface IComment
+  extends Model<InferAttributes<IComment>, InferCreationAttributes<IComment>> {
   id: UUID;
   author: string;
   content: string;

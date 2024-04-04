@@ -2,7 +2,7 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model } from 'sequ
 import sequelize from './config';
 import { UUID } from 'crypto';
 
-interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>> {
+export interface IUser extends Model<InferAttributes<IUser>, InferCreationAttributes<IUser>> {
   id: UUID;
   username: string;
   password: string;

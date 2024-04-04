@@ -1,6 +1,6 @@
-import User from './sequelize/User';
-import Comment from './sequelize/Comment';
-import Post from './sequelize/Post';
+import User, { type IUser } from './sequelize/User';
+import Comment, { type IComment } from './sequelize/Comment';
+import Post, { type IPost } from './sequelize/Post';
 import sequelize from './sequelize/config';
 import 'dotenv/config';
 
@@ -20,4 +20,4 @@ export const initDb = () => {
     });
 };
 
-export { User, Post, Comment };
+export { User, Post, Comment, IPost, IComment, IUser };
