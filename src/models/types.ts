@@ -1,5 +1,7 @@
 import { IUser, IPost, IComment } from '../db/';
 
+export type UserID = Pick<IUser, 'id'>;
+
 export type GetPost = Partial<Pick<IPost, 'id' | 'title'>>;
 
 export type CreatePost = Pick<IPost, 'id' | 'title' | 'content' | 'user_id' | 'image_url'>;
