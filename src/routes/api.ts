@@ -1,8 +1,7 @@
-import { RequestHandler, Router } from 'express';
-import UserModel from '../models/User.model';
+import { Router } from 'express';
 import { errorHandler, generateHashedPassword } from '../middlewares';
-import { createUserRules, updateUserRules, validation } from '../middlewares/validation';
-import { User } from '../db';
+import { validation } from '../middlewares/validation';
+import { createUserRules, updateUserRules } from '../middlewares/validation/user';
 import UserController from '../controllers/User.controller';
 
 const router = Router();
