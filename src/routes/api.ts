@@ -16,7 +16,7 @@ router.post('/user', createUserRules, validation, generateHashedPassword, UserCo
 
 router.delete('/user', UserController.delete);
 
-router.patch('/user', updateUserRules, validation, UserController.update);
+router.patch('/user/:id', updateUserRules, validation, UserController.update);
 
 router.use(errorHandler);
 
