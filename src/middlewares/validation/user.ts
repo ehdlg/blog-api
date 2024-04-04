@@ -1,12 +1,19 @@
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import UserModel from '../../models/User.model';
+import { type UserID } from '../../models/types';
 
 const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])/;
 
-const usernameExists = async (value: string) => {
-  const userInDB = await UserModel.get({ username: value });
+const usernameExists = async (username: string) => {
+  const userInDB = await UserModel.get({ username });
 
   if (null != userInDB) throw new Error('Username already taken.');
+};
+
+export const userExists = async (id: UserID) => {
+  const userInDB = await UserModel.get({ id });
+
+  if (null == userInDB) throw new Error(`User with ID:${id} does not exist.`);
 };
 
 export const createUserRules = (() => {
@@ -32,7 +39,7 @@ export const createUserRules = (() => {
 
 export const updateUserRules = (() => {
   return [
-    body('username').optional(),
+    param('id').exists().isUUID().withMessage('Invalid User ID'),
     body('updatedUser').exists().withMessage('You must send the updated fields'),
     body('updatedUser.username')
       .optional()
