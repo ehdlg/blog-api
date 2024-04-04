@@ -38,6 +38,7 @@ export const createUserRules = (() => {
 })();
 
 export const updateUserRules = (() => {
+  //TODO update how patch works, using req.params and not body. Implement auth before
   return [
     param('id').exists().isUUID().withMessage('Invalid User ID'),
     body('updatedUser').exists().withMessage('You must send the updated fields'),
