@@ -21,9 +21,9 @@ export default class PostModel {
     }
   }
 
-  static async create({ id, title, content, user_id }: CreatePost) {
+  static async create({ id, title, content, user_id, image_url }: CreatePost) {
     try {
-      return await Post.create({ id, title, content, user_id });
+      return await Post.create({ id, title, content, user_id, image_url });
     } catch (e) {
       throw e;
     }
@@ -37,10 +37,19 @@ export default class PostModel {
     }
   }
 
-  static async update({ id, title, content, likes, views, updated_at, published_at }: UpdatePost) {
+  static async update({
+    id,
+    title,
+    content,
+    likes,
+    views,
+    updated_at,
+    published_at,
+    image_url,
+  }: UpdatePost) {
     try {
       return await Post.update(
-        { title, content, likes, views, updated_at, published_at },
+        { title, content, likes, views, updated_at, published_at, image_url },
         { where: { id } }
       );
     } catch (e) {

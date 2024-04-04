@@ -11,7 +11,7 @@ export const initDb = () => {
   Post.hasMany(Comment, { foreignKey: 'post_id' });
 
   sequelize
-    .sync()
+    .sync({ force: true })
     .then(() => {
       console.log('Tables synced');
     })

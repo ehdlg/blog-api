@@ -11,6 +11,7 @@ export interface IPost extends Model<InferAttributes<IPost>, InferCreationAttrib
   published_at?: Date;
   updated_at?: Date;
   user_id: UUID;
+  image_url?: string | null;
 }
 
 const Post = sequelize.define<IPost>('Post', {
@@ -22,6 +23,7 @@ const Post = sequelize.define<IPost>('Post', {
   published_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
   user_id: { type: DataTypes.UUID, allowNull: false },
+  image_url: { type: DataTypes.STRING, defaultValue: null },
 });
 
 export default Post;
