@@ -1,8 +1,10 @@
 import { User } from '../db';
+import { UserID } from './types';
 
 export default class UserModel {
-  static async get({ username }: { username?: string }) {
+  static async get({ username, id }: { username?: string; id?: UserID }) {
     try {
+      if (null != id) return await User.findOne({ where: { id } });
       if (null == username) return await User.findAll();
 
       const newUser = await User.findOne({ where: { username: username } });
