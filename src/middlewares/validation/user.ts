@@ -11,9 +11,13 @@ const usernameExists = async (username: string) => {
 };
 
 export const userExists = async (id: UserID) => {
-  const userInDB = await UserModel.get({ id });
+  try {
+    const userInDB = await UserModel.get({ id });
 
-  if (null == userInDB) throw new Error(`User with ID:${id} does not exist.`);
+    if (null == userInDB) throw new Error(`User with ID:${id} does not exist.`);
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export const createUserRules = (() => {
