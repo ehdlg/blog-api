@@ -14,16 +14,20 @@ export interface IPost extends Model<InferAttributes<IPost>, InferCreationAttrib
   image_url?: string | null;
 }
 
-const Post = sequelize.define<IPost>('Post', {
-  id: { type: DataTypes.UUID, primaryKey: true },
-  title: { type: DataTypes.STRING, allowNull: false },
-  content: { type: DataTypes.STRING, allowNull: false },
-  likes: { type: DataTypes.INTEGER, defaultValue: 0 },
-  views: { type: DataTypes.INTEGER, defaultValue: 0 },
-  published_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-  updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-  user_id: { type: DataTypes.UUID, allowNull: false },
-  image_url: { type: DataTypes.STRING, defaultValue: null },
-});
+const Post = sequelize.define<IPost>(
+  'Post',
+  {
+    id: { type: DataTypes.UUID, primaryKey: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    content: { type: DataTypes.TEXT, allowNull: false },
+    likes: { type: DataTypes.INTEGER, defaultValue: 0 },
+    views: { type: DataTypes.INTEGER, defaultValue: 0 },
+    published_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    updated_at: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    user_id: { type: DataTypes.UUID, allowNull: false },
+    image_url: { type: DataTypes.STRING, defaultValue: null },
+  },
+  { timestamps: false }
+);
 
 export default Post;
