@@ -1,6 +1,7 @@
 import { RequestHandler } from 'express';
 import PostModel from '../models/Post.model';
 import { GetPost, CreatePost, DeletePost, UpdatePost } from '../models/types';
+import { UUID } from 'crypto';
 
 export class PostController {
   static get: RequestHandler = async (req, res, next) => {
@@ -35,7 +36,7 @@ export class PostController {
 
   static delete: RequestHandler = async (req, res, next) => {
     try {
-      const { id }: DeletePost = req.body;
+      const { id } = req.body;
 
       const deletedPost = await PostModel.delete({ id });
 
